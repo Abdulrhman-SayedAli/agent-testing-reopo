@@ -21,13 +21,19 @@ Modular backend scaffold for a Facebook-like demo social-network API.
    cp .env.example .env
    ```
 
-3. Start the development server:
+3. Review the required configuration values:
+
+   ```bash
+   $EDITOR .env
+   ```
+
+4. Start the development server:
 
    ```bash
    npm run dev
    ```
 
-4. Check the health endpoint:
+5. Check the health endpoint:
 
    ```bash
    curl http://localhost:3000/health
@@ -47,7 +53,9 @@ The endpoint should return `200 OK` with a small JSON payload.
 
 ## Environment Variables
 
-Environment variables are documented in `.env.example`. Do not commit real `.env` files or secret values.
+Environment variables are documented in `.env.example` and `docs/configuration.md`. Do not commit real `.env` files or secret values.
+
+The application loads configuration through `src/config/env.ts`, validates required values at startup, and exposes grouped config sections for app, database, authentication, cache, security, logging, and storage settings.
 
 ## Project Structure
 
