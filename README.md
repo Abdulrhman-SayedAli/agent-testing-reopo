@@ -39,7 +39,7 @@ Modular backend scaffold for a Facebook-like demo social-network API.
    curl http://localhost:3000/health
    ```
 
-The endpoint should return `200 OK` with a small JSON payload.
+The endpoint should return `200 OK` with a small JSON payload. During startup, the API verifies PostgreSQL connectivity before it begins listening.
 
 ## Docker Local Development
 
@@ -97,9 +97,13 @@ Useful Docker commands:
 
 ## Environment Variables
 
-Environment variables are documented in `.env.example` and `docs/configuration.md`. Do not commit real `.env` files or secret values.
+Environment variables are documented in `.env.example`, `docs/configuration.md`, and `docs/database.md`. Do not commit real `.env` files or secret values.
 
 The application loads configuration through `src/config/env.ts`, validates required values at startup, and exposes grouped config sections for app, database, authentication, cache, security, logging, and storage settings.
+
+## Database
+
+PostgreSQL connection pooling, startup validation, graceful shutdown, and Docker connection behavior are documented in `docs/database.md`.
 
 ## Project Structure
 

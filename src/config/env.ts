@@ -12,6 +12,11 @@ type AppConfig = Readonly<{
   };
   database: {
     url: string;
+    poolMax: number;
+    idleTimeoutMs: number;
+    connectionTimeoutMs: number;
+    ssl: boolean;
+    sslRejectUnauthorized: boolean;
   };
   auth: {
     accessTokenSecret: string;
@@ -72,6 +77,24 @@ function readPositiveInteger(name: string, fallback: number): number {
   }
 
   return parsed;
+}
+
+function readBoolean(name: string, fallback: boolean): boolean {
+  const rawValue = process.env[name]?.trim().toLowerCase();
+
+  if (!rawValue) {
+    return fallback;
+  }
+
+  if (rawValue === 'true') {
+    return true;
+  }
+
+  if (rawValue === 'false') {
+    return false;
+  }
+
+  throw new Error(`${name} must be either true or false`);
 }
 
 function readNodeEnv(): NodeEnv {
@@ -140,6 +163,11 @@ export const config: AppConfig = Object.freeze({
   },
   database: {
     url: readUrl('DATABASE_URL'),
+    poolMax: readPositiveInteger('DATABASE_POOL_MAX', 10),
+    idleTimeoutMs: readPositiveInteger('DATABASE_IDLE_TIMEOUT_MS', 30_000),
+    connectionTimeoutMs: readPositiveInteger('DATABASE_CONNECTION_TIMEOUT_MS', 5_000),
+    ssl: readBoolean('DATABASE_SSL', false),
+    sslRejectUnauthorized: readBoolean('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
   },
   auth: {
     accessTokenSecret: rejectPlaceholderSecret(

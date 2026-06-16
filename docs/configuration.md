@@ -36,8 +36,13 @@ The config module provides local defaults for operational values where the fallb
 - `RATE_LIMIT_WINDOW_MS=60000`
 - `RATE_LIMIT_MAX_REQUESTS=100`
 - `UPLOAD_MAX_FILE_SIZE_MB=10`
+- `DATABASE_POOL_MAX=10`
+- `DATABASE_IDLE_TIMEOUT_MS=30000`
+- `DATABASE_CONNECTION_TIMEOUT_MS=5000`
+- `DATABASE_SSL=false`
+- `DATABASE_SSL_REJECT_UNAUTHORIZED=true`
 
-Invalid numbers, unsupported log levels, malformed URLs, and missing required values fail startup with a clear error.
+Invalid numbers, unsupported log levels, malformed URLs, invalid booleans, and missing required values fail startup with a clear error.
 
 ## Config sections
 
@@ -50,3 +55,7 @@ The exported `config` object is grouped by responsibility:
 - `config.security`
 - `config.logging`
 - `config.storage`
+
+## Database settings
+
+`config.database` contains the PostgreSQL connection URL, pool size, timeout settings, and optional SSL controls. The runtime connection behavior is documented in `docs/database.md`.
