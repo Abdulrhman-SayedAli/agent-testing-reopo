@@ -241,11 +241,13 @@ async function main(): Promise<void> {
   throw new Error('Usage: tsx scripts/database/migrate.ts <up|rollback|status>');
 }
 
-void main()
-  .catch((error) => {
+void (async () => {
+  try {
+    await main();
+  } catch (error) {
     logger.error({ err: error }, 'Database migration command failed');
     process.exitCode = 1;
-  })
-  .finally(() => {
-    void closeDatabaseConnection();
-  });
+  } finally {
+    await closeDatabaseConnection();
+  }
+})();
