@@ -12,7 +12,10 @@
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "db:migrate": "tsx scripts/database/migrate.ts up",
+    "db:rollback": "tsx scripts/database/migrate.ts rollback",
+    "db:status": "tsx scripts/database/migrate.ts status"
   },
   "keywords": [
     "social-network",
