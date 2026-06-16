@@ -41,6 +41,50 @@ Modular backend scaffold for a Facebook-like demo social-network API.
 
 The endpoint should return `200 OK` with a small JSON payload.
 
+## Docker Local Development
+
+Docker Compose can start the API, PostgreSQL, and Redis together for local development.
+
+1. Create a local environment file:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Review `.env` and replace local-only placeholders before sharing the file or using it outside development. The Compose stack reads `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`, `POSTGRES_PORT`, `REDIS_PORT`, `PORT`, and the application secrets from this file.
+
+3. Start the full stack:
+
+   ```bash
+   docker compose up --build
+   ```
+
+4. Check the API health endpoint:
+
+   ```bash
+   curl http://localhost:3000/health
+   ```
+
+5. Stop the stack while keeping database and cache data:
+
+   ```bash
+   docker compose down
+   ```
+
+6. Start it again with the persisted local data:
+
+   ```bash
+   docker compose up
+   ```
+
+The API container uses Docker service hostnames for internal networking: `postgres` for PostgreSQL and `redis` for Redis. `docker-compose.yml` overrides `DATABASE_URL` and `REDIS_URL` for the API container, so host-based values in `.env.example` continue to work for direct `npm run dev` usage.
+
+Useful Docker commands:
+
+- `docker compose ps` shows service status and health checks.
+- `docker compose logs -f api` streams API logs.
+- `docker compose down --volumes` removes local PostgreSQL and Redis data volumes.
+
 ## Scripts
 
 - `npm run dev` starts the API in watch mode.
