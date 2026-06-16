@@ -46,4 +46,8 @@ The pool is configured from environment variables:
 - `DATABASE_SSL`: enables PostgreSQL SSL when set to `true`. Defaults to `false`.
 - `DATABASE_SSL_REJECT_UNAUTHORIZED`: controls certificate validation when SSL is enabled. Defaults to `true`.
 
+## Migrations
+
+Schema changes are versioned through the migration framework documented in `docs/migrations.md`. Use `npm run db:migrate`, `npm run db:rollback`, and `npm run db:status` for local migration work.
+
 Keep credentials in `.env` or the deployment secret manager. Do not hardcode database usernames, passwords, or URLs in application code.
