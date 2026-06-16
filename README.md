@@ -94,16 +94,19 @@ Useful Docker commands:
 - `npm run format` checks formatting with Prettier.
 - `npm run format:write` formats files with Prettier.
 - `npm test` runs the test suite.
+- `npm run db:migrate` applies pending database migrations.
+- `npm run db:rollback` rolls back the latest applied database migration.
+- `npm run db:status` lists applied and pending database migrations.
 
 ## Environment Variables
 
-Environment variables are documented in `.env.example`, `docs/configuration.md`, and `docs/database.md`. Do not commit real `.env` files or secret values.
+Environment variables are documented in `.env.example`, `docs/configuration.md`, `docs/database.md`, and `docs/migrations.md`. Do not commit real `.env` files or secret values.
 
 The application loads configuration through `src/config/env.ts`, validates required values at startup, and exposes grouped config sections for app, database, authentication, cache, security, logging, and storage settings.
 
 ## Database
 
-PostgreSQL connection pooling, startup validation, graceful shutdown, and Docker connection behavior are documented in `docs/database.md`.
+PostgreSQL connection pooling, startup validation, graceful shutdown, and Docker connection behavior are documented in `docs/database.md`. Migration commands, file naming, and review conventions are documented in `docs/migrations.md`.
 
 ## Project Structure
 
