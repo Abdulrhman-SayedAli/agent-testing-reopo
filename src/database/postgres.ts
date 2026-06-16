@@ -15,7 +15,7 @@ const databasePool = new Pool({
 });
 
 databasePool.on('error', (error) => {
-  logger.error({ error }, 'Unexpected PostgreSQL pool error');
+  logger.error({ err: error }, 'Unexpected PostgreSQL pool error');
 });
 
 export async function query<T extends QueryResultRow = QueryResultRow>(
@@ -51,7 +51,7 @@ export async function verifyDatabaseConnection(): Promise<void> {
       'PostgreSQL connection verified',
     );
   } catch (error) {
-    logger.error({ error }, 'PostgreSQL connection verification failed');
+    logger.error({ err: error }, 'PostgreSQL connection verification failed');
     throw error;
   }
 }
