@@ -56,7 +56,7 @@ process.once('SIGINT', (signal) => {
   void shutdown(signal)
     .then(() => process.exit(0))
     .catch((error) => {
-      logger.error({ error }, 'Graceful shutdown failed');
+      logger.error({ err: error }, 'Graceful shutdown failed');
       process.exit(1);
     });
 });
@@ -65,12 +65,12 @@ process.once('SIGTERM', (signal) => {
   void shutdown(signal)
     .then(() => process.exit(0))
     .catch((error) => {
-      logger.error({ error }, 'Graceful shutdown failed');
+      logger.error({ err: error }, 'Graceful shutdown failed');
       process.exit(1);
     });
 });
 
 void bootstrap().catch((error) => {
-  logger.error({ error }, 'API server startup failed');
+  logger.error({ err: error }, 'API server startup failed');
   process.exit(1);
 });
